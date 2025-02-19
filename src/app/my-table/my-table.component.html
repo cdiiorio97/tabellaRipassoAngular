@@ -3,8 +3,8 @@
         <tr>
             <th *ngFor="let header of headers" (click)="ordinaColonna(header)"> 
                 {{header.field}}
-                <span *ngIf="colonnaOrdinata === header.field">
-                    {{ direzioneOrdinamento === 'asc' ? '⬆️' : '⬇️' }}
+                <span *ngIf="sortedColumn === header.field">
+                    {{ order === 'asc' ? '⬆️' : '⬇️' }}
                 </span>
             </th>
         </tr>

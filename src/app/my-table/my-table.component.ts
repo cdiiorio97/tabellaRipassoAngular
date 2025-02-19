@@ -9,11 +9,12 @@ import { MyHeaders } from '../my-headers.interface';
   templateUrl: './my-table.component.html',
   styleUrl: './my-table.component.css'
 })
+
 export class MyTableComponent {
   @Input() headers: MyHeaders[] | undefined;
   @Input() data: any[] | undefined;
-  colonnaOrdinata: string = '';
-  direzioneOrdinamento: 'asc' | 'desc' = 'asc';
+  sortedColumn: string = '';
+  order: 'asc' | 'desc' = 'asc';
 
   constructor(private myTableService: TableService) { }
 
@@ -32,21 +33,21 @@ export class MyTableComponent {
     }
   }
 
-  ordinaColonna(colonna: MyHeaders) {
-    if (this.colonnaOrdinata === colonna.field) {
-      this.direzioneOrdinamento = this.direzioneOrdinamento === 'asc' ? 'desc' : 'asc';
+  ordinaColonna(column: MyHeaders) {
+    if (this.sortedColumn === column.field) {
+      this.order = this.order === 'asc' ? 'desc' : 'asc';
     } else {
-      this.colonnaOrdinata = colonna.field;
-      this.direzioneOrdinamento = colonna.sorting || 'asc';
+      this.sortedColumn = column.field;
+      this.order = column.sorting || 'asc';
     }
 
     if (!this.data) 
       return;
     this.data.sort((a, b) => {
-      if (a[colonna.field] < b[colonna.field]) {
-        return this.direzioneOrdinamento === 'asc' ? -1 : 1;
-      } else if (a[colonna.field] > b[colonna.field]) {
-        return this.direzioneOrdinamento === 'asc' ? 1 : -1;
+      if (a[column.field] < b[column.field]) {
+        return this.order === 'asc' ? -1 : 1;
+      } else if (a[column.field] > b[column.field]) {
+        return this.order === 'asc' ? 1 : -1;
       } else {
         return 0;
       }
