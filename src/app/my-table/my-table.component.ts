@@ -58,8 +58,6 @@ export class MyTableComponent {
   }
 
   filter() {
-    if (!this.originalData) 
-      return;
     let arrayTemp: any[] = [];
     if(Object.keys(this.filtro).length != 0){
       arrayTemp = this.filteredData.filter(elem => { 
@@ -73,7 +71,7 @@ export class MyTableComponent {
         });
       });
     };
-    return  this.filteredData = arrayTemp.length === 0 ? this.originalData : arrayTemp;
+    return this.filteredData = arrayTemp.length === 0 && Object.keys(this.filtro).length === 0 ? (this.originalData || []) : arrayTemp;
   }
 
   cambiaPagina(pagina: number) {
