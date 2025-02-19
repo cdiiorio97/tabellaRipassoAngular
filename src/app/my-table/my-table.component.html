@@ -1,0 +1,15 @@
+<div>
+    <table>
+        <tr>
+            <th *ngFor="let header of headers" (click)="ordinaColonna(header)"> 
+                {{header.field}}
+                <span *ngIf="colonnaOrdinata === header.field">
+                    {{ direzioneOrdinamento === 'asc' ? '⬆️' : '⬇️' }}
+                </span>
+            </th>
+        </tr>
+        <tr *ngFor="let row of data">
+            <td *ngFor="let header of headers">{{ row[header.field] }}</td>
+        </tr>
+    </table>
+</div>
