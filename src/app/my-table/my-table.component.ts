@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { HEADERS_MOCK } from '../mock-data';
 import { TableService } from '../table.service';
-import { MyHeaders } from '../my-headers.interface';
+import { MyHeaders } from './my-table-config';
 
 
 @Component({
