@@ -1,15 +1,30 @@
-<div>
+<div style="display:flex; flex-direction: column ;justify-content: center;">
     <table>
         <tr>
-            <th *ngFor="let header of headers" (click)="ordinaColonna(header)"> 
-                {{header.field}}
-                <span *ngIf="sortedColumn === header.field">
-                    {{ order === 'asc' ? '⬆️' : '⬇️' }}
-                </span>
+            <th *ngFor="let h of headers">
+            <input type="text"  (input)="aggiornaFiltro($event, h.field);" placeholder="Filtra per {{ h.name }}">
             </th>
         </tr>
-        <tr *ngFor="let row of data">
-            <td *ngFor="let header of headers">{{ row[header.field] }}</td>
-        </tr>
+        <thead>     
+            <tr>
+                <th *ngFor="let header of headers" (click)="ordinaColonna(header)"> 
+                    {{header.name}}
+                    <span *ngIf="sortedColumn === header.field">
+                        {{ order === 'asc' ? '⬆️' : '⬇️' }}
+                    </span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of (filter() || []) | paginazione:pagina:elementiPerPagina">
+                <td *ngFor="let header of headers">{{ row[header.field] }}</td>
+            </tr>
+        </tbody>
     </table>
+    <div class="paginazione-controlli">
+        <button (click)="cambiaPagina(pagina - 1)" [disabled]="pagina === 1" class="paginazione-bottone">Precedente</button>
+        <span>Pagina {{ pagina }}</span>
+        <button *ngFor="let numero of numeroPagine" (click)="cambiaPagina(numero)" [disabled]="numero === pagina" class="paginazione-bottone">{{ numero }}</button>
+        <button (click)="cambiaPagina(pagina + 1)" [disabled]="(pagina * elementiPerPagina) >= filteredData.length" class="paginazione-bottone">Successivo</button>
+      </div>
 </div>

@@ -1,8 +1,8 @@
 export const HEADERS_MOCK = [
-    { name: 1, field: 'name' },
-    { name: 2, field: 'age' },
-    { name: 3, field: 'city' },
-    { name: 4, field: 'country' }
+    { name: "Nome", field: 'name' },
+    { name: "Età", field: 'age' },
+    { name: "Città", field: 'city' },
+    { name: "Nazione", field: 'country' }
 ];
 
 export const DATA_MOCK = [

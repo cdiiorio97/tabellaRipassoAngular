@@ -9,13 +9,11 @@ export class TableService {
 
   constructor() { }
 
-  getData() : Observable<any[]>{
-    const data = of(DATA_MOCK);
-    return data;
+  getData() : Observable<any[]> {
+    return of(DATA_MOCK);
   }
 
-  getHeaders() : Observable<any[]>{
-    const headers = of(HEADERS_MOCK);
-    return headers;
+  getHeaders() : any[] {
+    return HEADERS_MOCK
   } 
 }
