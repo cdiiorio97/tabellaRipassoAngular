@@ -50,7 +50,7 @@
             {{ numero }}
         </button>
         <button (click)="cambiaPagina(pagina + 1)" 
-                [disabled]="(tableConfig?.pagination?.itemPerPage ?? 0) >0 && (pagina * tableConfig?.pagination?.itemPerPage) >= filteredData.length" 
+                [disabled]="(tableConfig?.pagination?.itemPerPage ?? 0) >0 && (pagina * (tableConfig?.pagination?.itemPerPage ?? 0)) >= filteredData.length" 
                 class="paginazione-bottone">
             Successivo
         </button>
