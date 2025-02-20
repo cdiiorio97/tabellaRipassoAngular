@@ -25,9 +25,7 @@ export class AppComponent {
     }
       this.tableConfig = {
       headers: this.myTableService.getHeaders(),
-      order: undefined,
-      search: undefined,
-      pagination: undefined,
+      pagination: { itemPerPage: 8 },
       actions: [
         { label: "EDIT", css: this.styleEdit },
         { label: "DELETE", css: this.styleDelete },

@@ -18,7 +18,6 @@ export class MyTableComponent {
   orderedData: any[] = [];
   filtro: { [key: string]: string } = {};
   pagina: number = 1;
-  elementiPerPagina: number = 8;
 
   addNewAction: MyActions | undefined;
 
@@ -88,7 +87,7 @@ export class MyTableComponent {
   }
 
   get numeroPagine(): number[] {
-    const totalPages = Math.ceil(this.filteredData.length / this.elementiPerPagina);
+    const totalPages = Math.ceil((this.filteredData?.length || 0) / (this.tableConfig?.pagination?.itemPerPage || 1));
     return Array.from({ length: totalPages }, (_, i) => i + 1);
   }
 

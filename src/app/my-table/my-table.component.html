@@ -18,7 +18,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let row of (filter() || []) | paginazione:pagina:elementiPerPagina" style="height: 40px;">
+                    <tr *ngFor="let row of (filter() || []) | paginazione:pagina:tableConfig?.pagination?.itemPerPage" style="height: 40px;">
                         <td *ngFor="let header of tableConfig?.headers">
                             {{row[header.field]}}
                         </td>
@@ -31,7 +31,7 @@
         </div>
         <div style="display: flex; flex-direction: column;">
             <div style="height: 40px;"></div> <!-- spazio vuoto -->
-            <div *ngFor="let row of (filter() || []) | paginazione:pagina:elementiPerPagina" style="height: 40px;">
+            <div *ngFor="let row of (filter() || []) | paginazione:pagina:tableConfig?.pagination?.itemPerPage" style="height: 40px;">
                 <ng-container *ngFor="let action of tableConfig?.actions">
                     <ng-container *ngIf="action.label != 'ADD NEW'">
                         <app-button [actionRichiesta]="action" (onClick)="handleActionsClick($event, row)"></app-button>
@@ -49,7 +49,8 @@
                 [disabled]="numero === pagina" class="paginazione-bottone">
             {{ numero }}
         </button>
-        <button (click)="cambiaPagina(pagina + 1)" [disabled]="(pagina * elementiPerPagina) >= filteredData.length" 
+        <button (click)="cambiaPagina(pagina + 1)" 
+                [disabled]="(tableConfig?.pagination?.itemPerPage ?? 0) >0 && (pagina * tableConfig?.pagination?.itemPerPage) >= filteredData.length" 
                 class="paginazione-bottone">
             Successivo
         </button>
