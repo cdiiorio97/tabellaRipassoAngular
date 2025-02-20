@@ -54,7 +54,7 @@ export class MyTableComponent {
     const target = event.target as HTMLInputElement;
     if(target.value === '') {
       delete this.filtro[field];
-      this.filteredData = this.filteredData ? (this.originalData || []) : [];
+      this.filteredData = this.orderedData;
       return;
     }
     else {
