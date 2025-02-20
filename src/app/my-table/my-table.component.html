@@ -1,6 +1,6 @@
 <div class="container">
     <div class="filters-div" >  
-        <div *ngFor="let h of headers" style="width: 20%; ">
+        <div *ngFor="let h of tableConfig?.headers" style="width: 20%; ">
             <input type="text" (input)="aggiornaFiltro($event, h.field);" placeholder="Filtra per {{ h.name }}">
         </div>
     </div>
@@ -9,7 +9,7 @@
             <table >
                 <thead>     
                     <tr style="height: 40px;">
-                        <th *ngFor="let header of headers" (click)="ordinaColonna(header)" style="width: 20%;"> 
+                        <th *ngFor="let header of tableConfig?.headers" (click)="ordinaColonna(header)" style="width: 20%;"> 
                             {{header.name}}
                             <span *ngIf="sortedColumn === header.field">
                                 {{ order === 'asc' ? '⬆️' : '⬇️' }}
@@ -19,23 +19,28 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let row of (filter() || []) | paginazione:pagina:elementiPerPagina" style="height: 40px;">
-                        <td *ngFor="let header of headers">
+                        <td *ngFor="let header of tableConfig?.headers">
                             {{row[header.field]}}
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <app-button [label]="aggiungi"></app-button>
+            <ng-container *ngIf="addNewAction">
+                <app-button [actionRichiesta]="addNewAction" (onClick)="handleActionsClick($event, {})"></app-button>
+            </ng-container>           
         </div>
         <div style="display: flex; flex-direction: column;">
             <div style="height: 40px;"></div> <!-- spazio vuoto -->
             <div *ngFor="let row of (filter() || []) | paginazione:pagina:elementiPerPagina" style="height: 40px;">
-                <app-button [label]="modifica" [row]="row"></app-button>
-                <app-button [label]="elimina" [row]="row"></app-button>
+                <ng-container *ngFor="let action of tableConfig?.actions">
+                    <ng-container *ngIf="action.label != 'ADD NEW'">
+                        <app-button [actionRichiesta]="action" (onClick)="handleActionsClick($event, row)"></app-button>
+                    </ng-container>
+                </ng-container>
             </div>
         </div>
     </div>
-    <div class="paginazione-controlli">
+    <div class="paginazione-controlli" style="width: 80%;">
         <button (click)="cambiaPagina(pagina - 1)" [disabled]="pagina === 1" class="paginazione-bottone">
             Precedente
         </button>

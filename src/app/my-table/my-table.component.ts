@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { MyHeaders } from './my-table-config';
+import { MyActions, MyHeaders, MyTableConfig } from './my-table-config';
 
 @Component({
   selector: 'app-my-table',
@@ -8,8 +8,9 @@ import { MyHeaders } from './my-table-config';
 })
 
 export class MyTableComponent {
-  @Input() headers: MyHeaders[] | undefined;
   @Input() data: any[] | undefined;
+  @Input() tableConfig: MyTableConfig | undefined;
+
   originalData: any[] | undefined;
   sortedColumn: string = '';
   order: string = '';
@@ -18,16 +19,18 @@ export class MyTableComponent {
   filtro: { [key: string]: string } = {};
   pagina: number = 1;
   elementiPerPagina: number = 8;
-  elimina= "Elimina";
-  modifica= "Modifica";
-  aggiungi= "Aggiungi";
-  trigger: boolean | undefined;
+
+  addNewAction: MyActions | undefined;
 
   ngOnInit(): void {
     this.originalData = this.data;
     this.filteredData = this.data || [];
     this.orderedData = this.data || [];
     this.filtro = {};
+    
+    if (this.tableConfig) {
+      this.addNewAction = this.tableConfig?.actions?.find(action => action.label === 'ADD NEW');
+    }
   }
 
   ordinaColonna(column: MyHeaders) {
@@ -87,5 +90,13 @@ export class MyTableComponent {
   get numeroPagine(): number[] {
     const totalPages = Math.ceil(this.filteredData.length / this.elementiPerPagina);
     return Array.from({ length: totalPages }, (_, i) => i + 1);
+  }
+
+  handleActionsClick(event: Event, row: any){
+    const action = event as unknown as String;
+    if (action === "ADD NEW") 
+      console.log(action);
+    else
+      console.log(action + " " + JSON.stringify(row));
   }
 }
