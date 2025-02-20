@@ -1,10 +1,11 @@
 <div style="display:flex; flex-direction: column ;justify-content: center;">
-    <table>
-        <tr>
-            <th *ngFor="let h of headers">
+    <div style="display: flex; margin-bottom: 10px;">
+        <div *ngFor="let h of headers" style="display: flex; width: 400px; justify-content: space-around;">
             <input type="text"  (input)="aggiornaFiltro($event, h.field);" placeholder="Filtra per {{ h.name }}">
-            </th>
-        </tr>
+        </div>
+    </div>
+    <table>
+        
         <thead>     
             <tr>
                 <th *ngFor="let header of headers" (click)="ordinaColonna(header)"> 
