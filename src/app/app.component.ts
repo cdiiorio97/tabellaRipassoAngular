@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MyHeaders, MyTableConfig } from './my-table/my-table-config';
+import { MyTableConfig } from './my-table/my-table-config';
 import { TableService } from './table.service';
 
 @Component({
@@ -10,8 +10,6 @@ import { TableService } from './table.service';
 export class AppComponent {
   title = 'Prova Tabella';
   tableConfig: MyTableConfig | undefined;
-
-  headers: MyHeaders[] | undefined;
   data: any[] | undefined;
 
   constructor(private myTableService: TableService) { }
