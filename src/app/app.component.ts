@@ -23,37 +23,37 @@ export class AppComponent {
           this.data = data;
       });
     }
-      this.tableConfig = {
+    this.tableConfig = {
       headers: this.myTableService.getHeaders(),
       pagination: { itemPerPage: 8 },
       actions: [
-        { label: "EDIT", css: this.styleEdit },
-        { label: "DELETE", css: this.styleDelete },
-        { label: "ADD NEW", css: this.styleAdd}
+        { label: "EDIT", 
+          css: {
+            "margin-top": "5px", 
+            "height": "30px", 
+            "margin-right": "5px", 
+            "border-radius": "10px",
+            "border-color": "lightblue", 
+            "background-color": "lightblue"
+          } 
+        },
+        { label: "DELETE", 
+          css: {
+            "margin-top": "5px",
+            "height": "30px", 
+            "background-color": "red", 
+            "border-radius": "10px"
+          } 
+        },
+        { label: "ADD NEW", 
+          css: {
+            "margin-top": "20px", 
+            "height": "30px", 
+            "width": "200px",
+            "border-radius": "10px"
+          }
+        }
       ]
     };
-  }
-
-  styleEdit = {
-    "margin-top": "5px", 
-    "height": "30px", 
-    "margin-right": "5px", 
-    "border-radius": "10px",
-    "border-color": "lightblue", 
-    "background-color": "lightblue"
-  }
-
-  styleDelete = {
-    "margin-top": "5px",
-    "height": "30px", 
-    "background-color": "red", 
-    "border-radius": "10px"
-  }
-
-  styleAdd = {
-    "margin-top": "20px", 
-    "height": "30px", 
-    "width": "200px",
-    "border-radius": "10px"
   }
 }
