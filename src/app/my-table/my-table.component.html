@@ -25,19 +25,13 @@
                     </tr>
                 </tbody>
             </table>
-            <button class="add-botton" (click)="premiTasto({}, 'aggiungi')">
-                Aggiungi riga
-            </button>
+            <app-button [label]="aggiungi"></app-button>
         </div>
         <div style="display: flex; flex-direction: column;">
             <div style="height: 40px;"></div> <!-- spazio vuoto -->
             <div *ngFor="let row of (filter() || []) | paginazione:pagina:elementiPerPagina" style="height: 40px;">
-                <button class="edit-botton" (click)="premiTasto(row, 'modifica')">
-                    Modifica
-                </button>
-                <button class="delete-botton" (click)="premiTasto(row, 'elimina')">
-                    Elimina
-                </button>
+                <app-button [label]="modifica" [row]="row"></app-button>
+                <app-button [label]="elimina" [row]="row"></app-button>
             </div>
         </div>
     </div>

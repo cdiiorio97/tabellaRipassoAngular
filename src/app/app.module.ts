@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { MyTableComponent } from './my-table/my-table.component';
 import { FormsModule } from '@angular/forms';
 import { PaginazionePipe } from './paginazione.pipe';
+import { ButtonComponent } from './button/button.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MyTableComponent,
-    PaginazionePipe
+    PaginazionePipe,
+    ButtonComponent
   ],
   imports: [
     BrowserModule,

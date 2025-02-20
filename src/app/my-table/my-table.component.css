@@ -42,14 +42,6 @@ table, th, td {
     cursor: not-allowed;
   }
   
-  .paginazione-bottone:not(:disabled):hover {
-    background-color: #150d83;
-  }
-  
-  .paginazione-bottone:not(:disabled):active {
-    background-color: #150d83;
-  }
-  
   .paginazione-controlli span {
     font-weight: bold;
     margin: 0 10px;
@@ -72,28 +64,5 @@ table, th, td {
     display: grid; 
     grid-template-columns: 80% auto; 
     gap: 10px;
-  }
-
-  .add-botton{
-    margin-top: 20px; 
-    height: 30px; 
-    width: 200px; 
-    border-radius: 10px;
-  }
-
-  .edit-botton{
-    margin-top: 5px; 
-    height: 30px; 
-    margin-right: 5px; 
-    border-radius: 10px; 
-    border-color: lightblue; 
-    background-color: lightblue;;
-  }
-
-  .delete-botton{
-    margin-top: 5px; 
-    height: 30px; 
-    background-color: red; 
-    border-radius: 10px;
   }
   
