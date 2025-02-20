@@ -58,9 +58,11 @@ export class MyTableComponent {
   }
 
   filter() {
+    if(this.originalData === undefined)
+      return;
     let arrayTemp: any[] = [];
     if(Object.keys(this.filtro).length != 0){
-      arrayTemp = this.filteredData.filter(elem => { 
+      arrayTemp = this.originalData.filter(elem => { 
         return Object.keys(this.filtro).every(field => {
           if (this.filtro[field]) {
             const value = elem[field] ? elem[field].toString().toLowerCase() : '';
@@ -82,6 +84,16 @@ export class MyTableComponent {
     const totalPages = Math.ceil(this.filteredData.length / this.elementiPerPagina);
     return Array.from({ length: totalPages }, (_, i) => i + 1);
   }
-  
 
+  premiTasto(riga: any, tipo: string) {
+    switch(tipo){
+      case 'modifica':
+      case 'elimina':
+        console.log(tipo + " la riga di " + JSON.stringify(riga));
+        break;
+      case 'aggiungi':
+        console.log('Aggiungi riga');
+        break;
+    }
+  }
 }

@@ -1,31 +1,58 @@
-<div style="display:flex; flex-direction: column ;justify-content: center;">
-    <div style="display: flex; margin-bottom: 10px;">
-        <div *ngFor="let h of headers" style="display: flex; width: 400px; justify-content: space-around;">
-            <input type="text"  (input)="aggiornaFiltro($event, h.field);" placeholder="Filtra per {{ h.name }}">
+<div class="container">
+    <div class="filters-div" >  
+        <div *ngFor="let h of headers" style="width: 20%; ">
+            <input type="text" (input)="aggiornaFiltro($event, h.field);" placeholder="Filtra per {{ h.name }}">
         </div>
     </div>
-    <table>
-        
-        <thead>     
-            <tr>
-                <th *ngFor="let header of headers" (click)="ordinaColonna(header)"> 
-                    {{header.name}}
-                    <span *ngIf="sortedColumn === header.field">
-                        {{ order === 'asc' ? '⬆️' : '⬇️' }}
-                    </span>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let row of (filter() || []) | paginazione:pagina:elementiPerPagina">
-                <td *ngFor="let header of headers">{{ row[header.field] }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="tabella-bottoni">  
+        <div style="display: flex; flex-direction: column;">      
+            <table >
+                <thead>     
+                    <tr style="height: 40px;">
+                        <th *ngFor="let header of headers" (click)="ordinaColonna(header)" style="width: 20%;"> 
+                            {{header.name}}
+                            <span *ngIf="sortedColumn === header.field">
+                                {{ order === 'asc' ? '⬆️' : '⬇️' }}
+                            </span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let row of (filter() || []) | paginazione:pagina:elementiPerPagina" style="height: 40px;">
+                        <td *ngFor="let header of headers">
+                            {{row[header.field]}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="add-botton" (click)="premiTasto({}, 'aggiungi')">
+                Aggiungi riga
+            </button>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+            <div style="height: 40px;"></div> <!-- spazio vuoto -->
+            <div *ngFor="let row of (filter() || []) | paginazione:pagina:elementiPerPagina" style="height: 40px;">
+                <button class="edit-botton" (click)="premiTasto(row, 'modifica')">
+                    Modifica
+                </button>
+                <button class="delete-botton" (click)="premiTasto(row, 'elimina')">
+                    Elimina
+                </button>
+            </div>
+        </div>
+    </div>
     <div class="paginazione-controlli">
-        <button (click)="cambiaPagina(pagina - 1)" [disabled]="pagina === 1" class="paginazione-bottone">Precedente</button>
+        <button (click)="cambiaPagina(pagina - 1)" [disabled]="pagina === 1" class="paginazione-bottone">
+            Precedente
+        </button>
         <span>Pagina {{ pagina }}</span>
-        <button *ngFor="let numero of numeroPagine" (click)="cambiaPagina(numero)" [disabled]="numero === pagina" class="paginazione-bottone">{{ numero }}</button>
-        <button (click)="cambiaPagina(pagina + 1)" [disabled]="(pagina * elementiPerPagina) >= filteredData.length" class="paginazione-bottone">Successivo</button>
-      </div>
+        <button *ngFor="let numero of numeroPagine" (click)="cambiaPagina(numero)" 
+                [disabled]="numero === pagina" class="paginazione-bottone">
+            {{ numero }}
+        </button>
+        <button (click)="cambiaPagina(pagina + 1)" [disabled]="(pagina * elementiPerPagina) >= filteredData.length" 
+                class="paginazione-bottone">
+            Successivo
+        </button>
+    </div>
 </div>

@@ -54,4 +54,46 @@ table, th, td {
     font-weight: bold;
     margin: 0 10px;
   }
+
+  .filters-div {
+    display: flex; 
+    flex-direction: row; 
+    margin-bottom: 10px; 
+    width: 75%; 
+    justify-content: space-between;
+  }
+
+  .container{
+    display:flex; 
+    flex-direction: column ;
+  }
+
+  .tabella-bottoni{
+    display: grid; 
+    grid-template-columns: 80% auto; 
+    gap: 10px;
+  }
+
+  .add-botton{
+    margin-top: 20px; 
+    height: 30px; 
+    width: 200px; 
+    border-radius: 10px;
+  }
+
+  .edit-botton{
+    margin-top: 5px; 
+    height: 30px; 
+    margin-right: 5px; 
+    border-radius: 10px; 
+    border-color: lightblue; 
+    background-color: lightblue;;
+  }
+
+  .delete-botton{
+    margin-top: 5px; 
+    height: 30px; 
+    background-color: red; 
+    border-radius: 10px;
+  }
   
